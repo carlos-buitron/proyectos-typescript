@@ -1,60 +1,40 @@
 
-// Funcion anonima autoinvocada
-(function(){
-	
+// Funcion de flecha anonima autoinvocada
+(()=>{
+	// Desestructuración de Objetos
 
-	let miFuncion1 = function(a: string){
-		return a;
+	const avenger = {
+		nombre: "Steve",
+		clave: "Capitán América",
+		poder: "Fuerza Fisica"
 	}
 
-	// Funcion tradicional
-	function miFuncion2(a: string){
-		return a;
-	}
+	const {poder} = avenger;
 
-	// Definir mi funcion como una constante y de esta manera no puedo sobreescribir la 
-	// definicion de mi funcion
-	const miFuncion3 = (a: string) => {
-		return a.toUpperCase;
-	}
+	const {nombre, clave} = avenger;
 
-	// Si tengo una sola linea de codigo que quiero retornar me ahorra las llaves
-	const miFuncion4 = (a: string) => a.toUpperCase;
-	const miFuncion5 = a => a.toUpperCase;
 
-	// Funcion de flecha para sumar dos numeros
-	const sumarDosNumeros = (a:number, b:number) => a + b;
-
-	// Funcion dentro de un objeto
-	const hulk = {
-		nombre: "Hulk",
-		smash: function(){
-			console.log(`${this.nombre} smash!!!`);
-		},
-		titanicHurl(){
-			let vm = this; 
-			setTimeout(function(){
-				// usamos el scope let vm = this
-				console.log(`${this.nombre} titanic hurl!!!`);
-				console.log(`${vm.nombre} titanic hurl!!!`);
-			}, 2000);
-		},
-		thunderClap: function(){
-			// evitamos el scope let vm = this usando funcion anonima
-			setTimeout(() => {
-				console.log(`${this.nombre} thunder clap!!!`);
-			}, 4000);
-		}
+	// Desestructuracion como argumento de la funcion
+	// Cuanso veamos interfaces y clases especificariamos que 
+	// tipo de propiedades y metodos vienen dentro de avenger
+	const extraerJson = ({nombre, poder}: any) => {
+		console.log(nombre, poder);
 	};
 
-	hulk.smash();
-	hulk.titanicHurl();
-	hulk.thunderClap();
+	extraerJson(avenger);
 
-	/*
-	Las funciones de flecha no modifica a lo que apunta "this", es decir fuera del 
-	setTimeout "this" apunta a "const hulk" y como la funcion de callback del setTimeout es 
-	una funcion de flecha significa que "this" sigue apuntando a "const hulk".
-	*/
+	// Desestructuración de arreglos
+	// Definir una arreglo de tipo string -> let miArray: tipodato[];
+	const avengers: string[] = ["Thor", "Ironman", "Spiderman"];
+	const [thor, ironman, spiderman] = avengers;
+
+	console.log(thor, ironman, spiderman);
+
+	const extraerArreglo = ([thor, ironman, spiderman]:string[]) => {
+		console.log(thor, ironman, spiderman);		
+	}
+
+	extraerArreglo(avengers);
+
 })();
 
